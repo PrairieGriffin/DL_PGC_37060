@@ -1,0 +1,106 @@
+/* We will add JavaScript to this file */
+/*Generate random target*/
+function getTarget() {
+    let a = Math.floor(Math.random() * 10) + 1;
+    let b = Math.floor(Math.random() * 10) + 1;
+    return a * b;
+}
+/* Balloons, AI helped me with this coding */
+// Balloons
+function createBalloons() {
+    let colors = ["red", "blue", "green", "orange", "purple"];
+
+    for (let i = 0; i < 8; i++) {
+        let balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+
+        balloon.style.left = Math.random() * 100 + "%";
+        balloon.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        document.body.appendChild(balloon);
+
+        setTimeout(() => balloon.remove(), 4000);
+    }
+}
+
+// Check answer
+function checkAnswer(row, col, cell) {
+    if (row * col == targetNumber) {
+        cell.innerText = targetNumber;
+        cell.classList.add("correct");
+
+        document.getElementById("message").innerText = "Correct! 🎉";
+
+        createBalloons();
+
+        // Disable all cells
+        document.querySelectorAll("#grid td").forEach(c => c.onclick = null);
+
+    } else {
+        mistakes++;
+        document.getElementById("mistakes").innerText = mistakes;
+
+        document.getElementById("message").innerText = "Oh no ... this is incorrect, try again!";
+
+        cell.classList.add("wrong");
+        cell.onclick = null;
+    }
+}
+
+// Build grid
+function createGrid() {
+    let table = document.getElementById("grid");
+    table.innerHTML = "";
+
+    //create new table row
+    let header = document.createElement("tr");
+    header.appendChild(document.createElement("td"));
+
+    // create a new table cell
+    for (let j = 1; j <= 10; j++) {
+        let cell = document.createElement("td");
+        cell.innerText = j;
+        cell.classList.add("label");
+        header.appendChild(cell);
+    }
+
+    table.appendChild(header);
+
+    for (let i = 1; i <= 10; i++) {
+        let row = document.createElement("tr");
+
+        let label = document.createElement("td");
+        label.innerText = i;
+        label.classList.add("label");
+        row.appendChild(label);
+
+        for (let j = 1; j <= 10; j++) {
+            let cell = document.createElement("td");
+            cell.innerText = "?";
+
+            cell.onclick = function () {
+                checkAnswer(i, j, cell);
+            };
+
+            row.appendChild(cell);
+        }
+
+        table.appendChild(row);
+    }
+}
+
+// Next question (resets mistakes)
+function nextQuestion() {
+    mistakes = 0;  //reset counter
+    document.getElementById("mistakes").innerText = mistakes;
+
+    targetNumber = getTarget();
+    document.getElementById("target").innerText = targetNumber;
+    document.getElementById("message").innerText = "";
+
+    createGrid();
+}
+
+// Start game
+nextQuestion();
