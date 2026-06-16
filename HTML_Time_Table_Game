@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <title>Times Table Game</title>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+
+    <h2>Times Table Game</h2>
+
+    <p>Select the cell where you will find this number: <b> <em> <span id="target"></span> </em> </b> </p>
+
+    <table id="grid"></table>
+
+    <p id="message"></p>
+
+    <p>Mistakes: <span id="mistakes">0</span></p>
+
+    <button onclick="nextQuestion()">Next Question</button>
+
+</body>
+</html>
