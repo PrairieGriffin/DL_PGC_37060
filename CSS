@@ -1,0 +1,98 @@
+/* We will add CSS to this file */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f8fb;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+td {
+    width: 45px;
+    height: 45px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: white;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+td:not(.label):hover {
+    background-color: #d6ebff;
+    transform: scale(1.05);
+}
+
+.label {
+    background-color: gold;
+    font-weight: bold;
+    cursor: default;
+}
+
+.wrong {
+    background-color: black;
+    color: white;
+}
+
+.correct {
+    background-color: #4CAF50;
+}
+
+/* Message + counter */
+#message {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+#mistakes {
+    color: red;
+    font-weight: bold;
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Balloons, Co-Pilot AI helped me with this coding */
+.balloon {
+    position: fixed;
+    bottom: -100px;
+    width: 40px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: rise 4s linear forwards;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background: black;
+    left: 50%;
+    top: 55px;
+}
+
+@keyframes rise {
+    0% { bottom: -100px; transform: translateX(0); }
+    50% { transform: translateX(15px); }
+    100% { bottom: 110%; transform: translateX(-15px); }
+}
+/*I'd like to make the balloon handles squiggily - sadly wasn't able to figure that out, perhaps I needed to import svg images*/
